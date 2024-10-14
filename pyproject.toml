@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "virgo"
+version = "0.1.0"
+description = "Container Image Updater for Git Ops Repositories"
+readme = "README.rst"
+authors = [
+  {name = "Alessandro Sbarbati", email = "122787746+asbarbati@users.noreply.github.com"}
+]
+maintainers = [
+  {name = "Alessandro Sbarbati", email = "122787746+asbarbati@users.noreply.github.com"}
+]
+classifiers = [
+
+]
+license = {text = "GNU General Public License v3"}
+dependencies = [
+  "typer"
+]
+
+[project.optional-dependencies]
+dev = [
+    "coverage",  # testing
+    "mypy",  # linting
+    "pytest",  # testing
+    "ruff"  # linting
+]
+
+[project.urls]
+
+bugs = "https://github.com/asbarbati/virgo/issues"
+changelog = "https://github.com/asbarbati/virgo/blob/master/changelog.md"
+homepage = "https://github.com/asbarbati/virgo"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.package-data]
+"*" = ["*.*"]
+
+
+
+
+# Mypy
+# ----
+
+[tool.mypy]
+files = "."
+
+# Use strict defaults
+strict = true
+warn_unreachable = true
+warn_no_return = true
+
+[[tool.mypy.overrides]]
+# Don't require test functions to include types
+module = "tests.*"
+allow_untyped_defs = true
+disable_error_code = "attr-defined"
