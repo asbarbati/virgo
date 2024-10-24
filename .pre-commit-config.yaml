@@ -10,3 +10,12 @@ repos:
   rev: 24.10.0
   hooks:
   - id: black
+- repo: https://github.com/gitleaks/gitleaks
+  rev: v8.21.1
+  hooks:
+    - id: gitleaks
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.7.1
+  hooks:
+    - id: ruff
+    - id: ruff-format
