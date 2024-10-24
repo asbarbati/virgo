@@ -1,0 +1,7 @@
+repos:
+  - name: Titolo arbitrario
+    image_repository: ghcr.io/immich-app/immich-server
+    git_ssh_url: git@gitlab.example:main/argocd/immich.git
+    git_ssh_privatekey: $HOME/.ssh/id_rsa
+    git_values_filename: values.yaml
+    values_key: .image.tag
