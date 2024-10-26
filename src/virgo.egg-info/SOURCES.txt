@@ -27,4 +27,6 @@ src/virgo.egg-info/requires.txt
 src/virgo.egg-info/top_level.txt
 tests/__init__.py
 tests/test_config.py
+tests/test_loader.py
+tests/test_virgo.py
 tests/assets/config.yaml

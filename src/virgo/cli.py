@@ -24,9 +24,9 @@ structlog.configure(
 log = structlog.get_logger()
 
 
-def main(
-    config_file: Annotated[Path, typer.Option(help="Configuration file")] = "config.yml"
-) -> None:  # noqa D417
+def main(  # noqa D417
+    config_file: Annotated[Path, typer.Option(help="Configuration file")] = "config.yml",
+) -> None:
     """Main CLI function for Virgo project.
 
     Args:

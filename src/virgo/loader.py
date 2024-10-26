@@ -52,5 +52,5 @@ class Loader:
         for repo in configdata["data"]["repos"]:
             config = Config()
             config.load(config=repo)
-            obj = Virgo(config=config)
+            obj = Virgo(config=config, log=self.log)
             obj.run()
