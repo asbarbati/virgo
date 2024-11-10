@@ -19,3 +19,6 @@ def test_image_version():
 
     image_versions = provider_obj.get_image_versions("Mirio", "verbacap")
     assert image_versions["data"][0]["name"][1] == "latest"
+
+    image_version_pages = provider_obj.get_image_versions("immich-app", "immich-server")
+    assert len(image_version_pages["data"]) > 120

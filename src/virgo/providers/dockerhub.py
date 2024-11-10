@@ -5,6 +5,17 @@ import requests
 
 
 class DockerHub:
+    def __str__(self) -> str:
+        """Return a class string name.
+
+        Args:
+            None
+
+        Returns:
+            Return a name of the class.
+        """
+        return self.name
+
     def __init__(self, log: BoundLoggerLazyProxy) -> None:
         """DockerHub provider for getting the information from it.
 
@@ -16,6 +27,7 @@ class DockerHub:
         """
         self.endpoint = "https://hub.docker.com"
         self.headers = {}
+        self.name = "DockerHub"
         auth_token = getenv("DOCKERHUB_API_TOKEN", default=None)
         self.log = log
         self.max_pages = 20
