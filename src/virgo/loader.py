@@ -3,6 +3,7 @@ from pathlib import Path
 from structlog._config import BoundLoggerLazyProxy
 from .config import Config
 from .virgo import Virgo
+from .typer import TyperConfigs, TyperConfig
 
 
 class Loader:
@@ -19,7 +20,7 @@ class Loader:
         self.log = log
         self.config_file = config_file
 
-    def read_config(self) -> dict:
+    def read_config(self) -> TyperConfigs:
         """Load the config in YAML format and wrap it into a self.config_file var.
 
         Args:
@@ -29,12 +30,12 @@ class Loader:
             None
         """
         self.log.debug("Loading config")
-        out = {"error": False, "data": {}}
+        out = TyperConfigs(error=False, data=TyperConfig(repos=[]))
         if not self.config_file.exists():
             self.log.error("File not exists.")
             out["error"] = True
         else:
-            out["data"] = safe_load(self.config_file.open())
+            out["data"] = TyperConfig(repos=safe_load(self.config_file.open())["repos"])
         return out
 
     def run(self) -> None:

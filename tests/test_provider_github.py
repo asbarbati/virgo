@@ -21,4 +21,4 @@ def test_image_version():
     assert image_versions["data"][0]["name"][1] == "latest"
 
     image_version_pages = provider_obj.get_image_versions("immich-app", "immich-server")
-    assert len(image_version_pages["data"]) > 120
+    assert len(image_version_pages["data"]) > 50

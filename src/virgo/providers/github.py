@@ -1,21 +1,12 @@
 from os import getenv
 from structlog._config import BoundLoggerLazyProxy
 from datetime import datetime
+from virgo.typer import TyperImageVersion, TyperMetadata
+from .baseprovider import BaseProvider
 import requests
 
 
-class GitHub:
-    def __str__(self) -> str:
-        """Return a class string name.
-
-        Args:
-            None
-
-        Returns:
-            Return a name of the class.
-        """
-        return self.name
-
+class GitHub(BaseProvider):
     def __init__(self, log: BoundLoggerLazyProxy) -> None:
         """GitHub provider for getting the information from it.
 
@@ -40,7 +31,7 @@ class GitHub:
             self.log.error("Github Token needed for getting the information from Github.")
             return
 
-    def get_image_versions(self, parent: str, project: str) -> dict:
+    def get_image_versions(self, parent: str, project: str) -> TyperImageVersion:
         """Query the Github API in order to get the images version availables and return a list of it.
 
         Args:
@@ -55,9 +46,9 @@ class GitHub:
             }
         """
         STATUS_CODE_OK = 200
-        out = {"error": False, "data": []}
+        out = TyperImageVersion({"error": False, "data": []})
         endpoint = f"{self.endpoint}/users/{parent}/packages/container/{project}/versions"
-        self.log.info(f"Getting image versions from GitHub for the User/Orgs: {parent} and project: {project}")
+        self.log.info(f"Getting image versions from GitHub for the User/Orgs: '{parent}' and project: '{project}'")
         req = requests.get(endpoint, headers=self.headers)
         tmpdb = []
         if req.status_code == STATUS_CODE_OK:
@@ -83,7 +74,7 @@ class GitHub:
             out["error"] = True
         return out
 
-    def get_metadata(self, image_repository: str) -> dict:
+    def get_metadata(self, image_repository: str) -> TyperMetadata:
         """Getting the GitHub metadata like user and orgs.
 
         Args:
@@ -96,7 +87,7 @@ class GitHub:
                  "project": "<project name>"}
             }
         """
-        out = {"error": False, "data": {"parent": None, "project": None}}
+        out = TyperMetadata({"error": False, "data": {"parent": "", "project": ""}})
         self.log.info("Getting Metadata from GitHub")
         if image_repository.startswith("ghcr"):
             ir_split = image_repository.split("/")

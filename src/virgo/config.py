@@ -1,3 +1,6 @@
+from typing import Any
+
+
 class Config:
     def __init__(self) -> None:
         """Configuration class for the Virgo Object.
@@ -14,8 +17,9 @@ class Config:
         self.git_ssh_privatekey = None
         self.git_values_filename = None
         self.values_key = None
+        self.version_match = None
 
-    def load(self, config: dict) -> None:
+    def load(self, config: dict[Any, Any]) -> None:
         """Load the config given from the file and inject it into the class vars.
 
         Args:
@@ -31,6 +35,7 @@ class Config:
             "git_ssh_privatekey",
             "git_values_filename",
             "values_key",
+            "version_match",
         ]
 
         for itervar in mandatory_vars:

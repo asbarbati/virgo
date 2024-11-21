@@ -1,21 +1,12 @@
 from os import getenv
 from structlog._config import BoundLoggerLazyProxy
 from datetime import datetime
+from virgo.typer import TyperImageVersion, TyperMetadata
+from .baseprovider import BaseProvider
 import requests
 
 
-class DockerHub:
-    def __str__(self) -> str:
-        """Return a class string name.
-
-        Args:
-            None
-
-        Returns:
-            Return a name of the class.
-        """
-        return self.name
-
+class DockerHub(BaseProvider):
     def __init__(self, log: BoundLoggerLazyProxy) -> None:
         """DockerHub provider for getting the information from it.
 
@@ -36,7 +27,7 @@ class DockerHub:
         else:
             self.log.warning("DockerHub Token not found. Using anonymous access.")
 
-    def get_image_versions(self, parent: str, project: str) -> dict:
+    def get_image_versions(self, parent: str, project: str) -> TyperImageVersion:
         """Query the DockerHub API in order to get the images version availables and return a list of it.
 
         Args:
@@ -51,7 +42,7 @@ class DockerHub:
             }
         """
         STATUS_CODE_OK = 200
-        out = {"error": False, "data": []}
+        out = TyperImageVersion({"error": False, "data": []})
         endpoint = f"{self.endpoint}/v2/namespaces/{parent}/repositories/{project}/tags"
         self.log.info(f"Getting image versions from DockerHub for the User/Orgs: {parent} and project: {project}")
         # Get Page 1
@@ -78,7 +69,7 @@ class DockerHub:
             out["error"] = True
         return out
 
-    def get_metadata(self, image_repository: str) -> dict:
+    def get_metadata(self, image_repository: str) -> TyperMetadata:
         """Getting the DockerHub metadata like user and orgs.
 
         Args:
@@ -92,7 +83,7 @@ class DockerHub:
             }
         """
         DOCKERHUB_SPLITSLASHES = 2
-        out = {"error": False, "data": {"parent": None, "project": None}}
+        out = TyperMetadata({"error": False, "data": {"parent": "", "project": ""}})
         self.log.info("Getting Metadata from DockerHub")
         if image_repository.startswith("docker.io"):
             name_split = image_repository.split("/")
