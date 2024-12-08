@@ -160,7 +160,7 @@ class UpTainer:
             self.log.error("Error during matching the version.")
             return
 
-        self.log.info(f"The version to apply: '{version["data"]}'")
+        self.log.info(f"The version to apply: {version['data']}")
         git_obj = Git(
             log=self.log,
             remote_url=self.config.git_ssh_url,
