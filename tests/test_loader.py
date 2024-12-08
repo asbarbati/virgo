@@ -1,6 +1,5 @@
 import structlog
 from virgo.loader import Loader
-from virgo.config import Config
 from pathlib import Path
 
 log = structlog.get_logger()

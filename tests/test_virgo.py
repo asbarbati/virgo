@@ -26,7 +26,7 @@ def test_imageprovider():
     providermissing = virgo_obj.get_image_provider(
         image_repository="example.com/provider/missing"
     )
-    assert providermissing["data"] == {}
+    assert str(providermissing["data"]) == "Base"
 
     providernoimage = virgo_obj.get_image_provider(image_repository="")
     assert providernoimage["error"] == True

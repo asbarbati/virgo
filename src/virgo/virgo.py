@@ -1,11 +1,17 @@
 """Main module."""
 
-from .config import Config
 from structlog._config import BoundLoggerLazyProxy
+from structlog.contextvars import bind_contextvars
+from box import Box
+from os.path import exists
+from .config import Config
 from .providers.github import GitHub
 from .providers.dockerhub import DockerHub
-from .typer import TyperImageProvider, TyperDetectedVersion, TyperImageVersion
+from .providers.baseprovider import BaseProvider
+from .git import Git
+from .typer import TyperImageProvider, TyperDetectedVersion, TyperImageList, TyperGenericReturn
 import re
+import yaml
 
 
 class Virgo:
@@ -21,7 +27,10 @@ class Virgo:
         """
         self.config = config
         self.log = log
+        bind_contextvars(reponame=self.config.name)
+        self.provider = BaseProvider(log=self.log)
         self.image_provider = None
+        self.yamlcontent = None
 
     def get_image_provider(self, image_repository: str) -> TyperImageProvider:
         """Return container image provider.
@@ -33,7 +42,7 @@ class Virgo:
             Return a dict that have image provider object.
             Its like: {"error": <bool>, "data": "<provider object>"}
         """
-        out = TyperImageProvider(error=False, data={})
+        out = TyperImageProvider(error=False, data=BaseProvider(log=self.log))
         DOCKERHUB_SPLITSLASHES = 2
         image_repository = image_repository.replace("https://", "").replace("http://", "")
 
@@ -49,7 +58,7 @@ class Virgo:
             out["error"] = True
         return out
 
-    def detect_version(self, tags: TyperImageVersion) -> TyperDetectedVersion:
+    def detect_version(self, tags: list[TyperImageList]) -> TyperDetectedVersion:
         """Find the latest version to apply.
 
         Args:
@@ -75,6 +84,49 @@ class Virgo:
             self.log.error("Error during detecting version.")
         return out
 
+    def detect_current_version(self, fpath: str, key: str) -> TyperDetectedVersion:
+        """Reading and return the tag image used on the git project.
+
+        Args:
+            fpath (str): Absolute path of the yaml file to read.
+            key (str): Key path to read on the yaml, like "image.tag".
+
+        Returns:
+            TyperDetectedVersion object
+        """
+        out = TyperDetectedVersion(error=False, data=None)
+        if exists(fpath):
+            box = Box.from_yaml(filename=fpath, Loader=yaml.FullLoader, default_box=True, box_dots=True)
+            out["data"] = box[key]
+        else:
+            self.log.error(f"File '{fpath}' not exists")
+            out["error"] = True
+        return out
+
+    def update_version(self, fpath: str, key: str, newversion: str) -> TyperGenericReturn:
+        """Update the tag image used on the git project in the values file specified.
+
+        Args:
+            fpath (str): Absolute path of the yaml file to read.
+            key (str): Key path to read on the yaml, like "image.tag".
+            newversion (str): New version to apply.
+
+        Returns:
+            TyperDetectedVersion object
+        """
+        out = TyperGenericReturn(error=False, data=None)
+        if exists(fpath):
+            box = Box.from_yaml(filename=fpath, Loader=yaml.FullLoader, default_box=True, box_dots=True)
+            box[key] = newversion
+            fopen = open(fpath, "w")
+            fopen.write(box.to_yaml())
+            fopen.close()
+            self.log.info(f"Pushing the key '{key}' into '{fpath}'")
+        else:
+            self.log.error(f"File '{fpath}' not exists")
+            out["error"] = True
+        return out
+
     def run(self) -> None:
         """Main function to check repos.
 
@@ -85,7 +137,7 @@ class Virgo:
             None
         """
         self.log.info(f"Running check named: '{self.config.name}'")
-        image_provider = self.get_image_provider(self.config.image_repository)  # type: ignore
+        image_provider = self.get_image_provider(image_repository=self.config.image_repository)
         if not image_provider["error"]:
             self.provider = image_provider["data"]
         else:
@@ -93,7 +145,7 @@ class Virgo:
             return
         self.log.info(f"Image provider detected: '{self.provider}'")
         self.log.info("Getting the image tags from the provider")
-        metadata = self.provider.get_metadata(self.config.image_repository)
+        metadata = self.provider.get_metadata(image_repository=self.config.image_repository)
         if metadata["error"]:
             self.log.error("Error during getting the tags.")
             return
@@ -108,4 +160,27 @@ class Virgo:
             self.log.error("Error during matching the version.")
             return
 
-        self.log.info(f"Version matched: '{version["data"]}'")
+        self.log.info(f"The version to apply: '{version["data"]}'")
+        git_obj = Git(
+            log=self.log,
+            remote_url=self.config.git_ssh_url,
+            branch=self.config.git_branch,
+            ssh_private_key=self.config.git_ssh_privatekey,
+        )
+        git_obj.create_workdir()
+        pull_check = git_obj.clone_repo()
+        if pull_check["error"]:
+            return
+        current_version = self.detect_current_version(
+            fpath=f"{git_obj.work_directory}/{self.config.git_values_filename}", key=self.config.values_key
+        )
+        if current_version["error"]:
+            return
+        self.log.info(f"Version detected Current: {current_version['data']} / To apply: {version['data']}")
+        self.update_version(
+            fpath=f"{git_obj.work_directory}/{self.config.git_values_filename}",
+            key=self.config.values_key,
+            newversion=version["data"],
+        )
+        git_obj.push_repo(fpath=self.config.git_values_filename, newversion=version["data"])
+        self.log.info("---> Done.")

@@ -71,6 +71,7 @@ class GitHub(BaseProvider):
                 itemdate = datetime.strptime(item["updated_at"].replace("Z", ""), "%Y-%m-%dT%H:%M:%S")
                 out["data"].append({"last_update": itemdate, "name": item["metadata"]["container"]["tags"]})
         else:
+            self.log.error(f"Error during getting image, returns: {req.json()}")
             out["error"] = True
         return out
 
@@ -88,7 +89,7 @@ class GitHub(BaseProvider):
             }
         """
         out = TyperMetadata({"error": False, "data": {"parent": "", "project": ""}})
-        self.log.info("Getting Metadata from GitHub")
+        self.log.info("Getting Metadata from 'GitHub'")
         if image_repository.startswith("ghcr"):
             ir_split = image_repository.split("/")
             out["data"]["parent"] = ir_split[1]

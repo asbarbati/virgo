@@ -1,4 +1,5 @@
 from typing import Any
+from os import environ
 
 
 class Config:
@@ -18,6 +19,7 @@ class Config:
         self.git_values_filename = None
         self.values_key = None
         self.version_match = None
+        self.git_branch = None
 
     def load(self, config: dict[Any, Any]) -> None:
         """Load the config given from the file and inject it into the class vars.
@@ -32,7 +34,6 @@ class Config:
             "name",
             "image_repository",
             "git_ssh_url",
-            "git_ssh_privatekey",
             "git_values_filename",
             "values_key",
             "version_match",
@@ -41,3 +42,13 @@ class Config:
         for itervar in mandatory_vars:
             if config[itervar]:
                 setattr(self, itervar, config[itervar])
+
+        if "git_branch" in config:
+            self.git_branch = config["git_branch"]
+        else:
+            self.git_branch = "main"
+
+        if "git_ssh_privatekey" in config:
+            self.git_ssh_privatekey = config["git_ssh_privatekey"]
+        else:
+            self.git_ssh_privatekey = f"{environ.get("HOME")}/id_rsa"

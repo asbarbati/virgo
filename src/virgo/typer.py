@@ -1,4 +1,6 @@
 from typing import TypedDict, Any
+from re import Match
+from datetime import datetime
 
 
 class TyperConfig(TypedDict):
@@ -12,7 +14,7 @@ class TyperConfigs(TypedDict):
 
 class TyperImageList(TypedDict):
     name: str
-    last_update: object
+    last_update: datetime
 
 
 class TyperMetadataDict(TypedDict):
@@ -37,4 +39,8 @@ class TyperImageProvider(TypedDict):
 
 class TyperDetectedVersion(TypedDict):
     error: bool
-    data: str | None
+    data: Match[str] | None
+
+
+class TyperGenericReturn(TypedDict):
+    error: bool

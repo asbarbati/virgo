@@ -6,6 +6,7 @@ import logging
 from pathlib import Path
 from typing import Annotated
 from .loader import Loader
+from structlog.contextvars import merge_contextvars
 
 
 def main(  # noqa D417
@@ -32,6 +33,7 @@ def main(  # noqa D417
             structlog.processors.add_log_level,
             structlog.processors.StackInfoRenderer(),
             structlog.dev.set_exc_info,
+            merge_contextvars,
             structlog.processors.EventRenamer("msg"),
             structlog.processors.JSONRenderer(),
         ],

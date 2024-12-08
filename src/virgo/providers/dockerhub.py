@@ -66,6 +66,7 @@ class DockerHub(BaseProvider):
                 itemdate = datetime.strptime(item["last_updated"].split(".")[0], "%Y-%m-%dT%H:%M:%S")
                 out["data"].append({"last_update": itemdate, "name": item["name"]})
         else:
+            self.log.error(f"Error during getting image, returns: {req.json()}")
             out["error"] = True
         return out
 
@@ -84,7 +85,7 @@ class DockerHub(BaseProvider):
         """
         DOCKERHUB_SPLITSLASHES = 2
         out = TyperMetadata({"error": False, "data": {"parent": "", "project": ""}})
-        self.log.info("Getting Metadata from DockerHub")
+        self.log.info("Getting Metadata from 'DockerHub'")
         if image_repository.startswith("docker.io"):
             name_split = image_repository.split("/")
             out["data"]["parent"] = name_split[1]
