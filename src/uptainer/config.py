@@ -51,4 +51,5 @@ class Config:
         if "git_ssh_privatekey" in config:
             self.git_ssh_privatekey = config["git_ssh_privatekey"]
         else:
-            self.git_ssh_privatekey = f"{environ.get("HOME")}/id_rsa"
+            homedir = environ.get("HOME", "/tmp")
+            self.git_ssh_privatekey = f"{homedir}/id_rsa"
