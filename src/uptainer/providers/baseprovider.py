@@ -1,5 +1,5 @@
 from structlog._config import BoundLoggerLazyProxy
-from virgo.typer import TyperImageVersion, TyperMetadata, TyperMetadataDict
+from uptainer.typer import TyperImageVersion, TyperMetadata, TyperMetadataDict
 
 
 class BaseProvider:

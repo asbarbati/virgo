@@ -1,1 +1,1 @@
-"""Unit test package for virgo."""
+"""Unit test package for uptainer."""

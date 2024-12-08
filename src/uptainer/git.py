@@ -96,6 +96,6 @@ class Git:
                 self.log.error(f"Error during pulling the repo, error: '{error}'")
                 out["error"] = True
         else:
-            self.log.error("Virgo currently support clone only via SSH. Exiting.")
+            self.log.error("Uptainer currently support clone only via SSH. Exiting.")
             out["error"] = True
         return out

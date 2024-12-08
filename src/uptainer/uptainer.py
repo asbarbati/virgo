@@ -14,12 +14,12 @@ import re
 import yaml
 
 
-class Virgo:
+class UpTainer:
     def __init__(self, config: Config, log: BoundLoggerLazyProxy) -> None:
         """Main class of the package.
 
         Args:
-            config (Config): Virgo Config class, it will contain all the infos.
+            config (Config): Uptainer Config class, it will contain all the infos.
             log (BoundLoggerLazyProxy): Log class to inject into the vars. Class: structlog
 
         Returns:

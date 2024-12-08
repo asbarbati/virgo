@@ -1,4 +1,4 @@
-Welcome to virgo's documentation!
+Welcome to uptainer's documentation!
 ======================================
 
 .. toctree::

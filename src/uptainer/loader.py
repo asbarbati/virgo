@@ -2,13 +2,13 @@ from yaml import safe_load
 from pathlib import Path
 from structlog._config import BoundLoggerLazyProxy
 from .config import Config
-from .virgo import Virgo
+from .uptainer import UpTainer
 from .typer import TyperConfigs, TyperConfig
 
 
 class Loader:
     def __init__(self, log: BoundLoggerLazyProxy, config_file: Path) -> None:
-        """Loader class to load all the repos from the config and trasform it into Virgo Classes.
+        """Loader class to load all the repos from the config and trasform it into uptainer Classes.
 
         Args:
             log (BoundLoggerLazyProxy): Log class to inject into the vars. Class: structlog
@@ -39,7 +39,7 @@ class Loader:
         return out
 
     def run(self) -> None:
-        """Main method, it will load the config file and create a Virgo class for each of them.
+        """Main method, it will load the config file and create a uptainer class for each of them.
 
         Args:
             None
@@ -53,5 +53,5 @@ class Loader:
         for repo in configdata["data"]["repos"]:
             config = Config()
             config.load(config=repo)
-            obj = Virgo(config=config, log=self.log)
+            obj = UpTainer(config=config, log=self.log)
             obj.run()

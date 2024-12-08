@@ -1,5 +1,5 @@
 import structlog
-from virgo.loader import Loader
+from uptainer.loader import Loader
 from pathlib import Path
 
 log = structlog.get_logger()

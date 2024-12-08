@@ -1,7 +1,7 @@
 from os import getenv
 from structlog._config import BoundLoggerLazyProxy
 from datetime import datetime
-from virgo.typer import TyperImageVersion, TyperMetadata
+from uptainer.typer import TyperImageVersion, TyperMetadata
 from .baseprovider import BaseProvider
 import requests
 

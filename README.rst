@@ -1,22 +1,22 @@
 =====
-Virgo
+Uptainer
 =====
 
-.. image:: https://img.shields.io/pypi/v/virgo.svg
-        :target: https://pypi.python.org/pypi/virgo
+.. image:: https://img.shields.io/pypi/v/uptainer.svg
+        :target: https://pypi.python.org/pypi/uptainer
 
-.. image:: https://img.shields.io/travis/asbarbati/virgo.svg
-        :target: https://travis-ci.com/asbarbati/virgo
+.. image:: https://img.shields.io/travis/asbarbati/uptainer.svg
+        :target: https://travis-ci.com/asbarbati/uptainer
 
-.. image:: https://readthedocs.org/projects/virgo/badge/?version=latest
-        :target: https://virgo.readthedocs.io/en/latest/?version=latest
+.. image:: https://readthedocs.org/projects/uptainer/badge/?version=latest
+        :target: https://uptainer.readthedocs.io/en/latest/?version=latest
         :alt: Documentation Status
 
-Container Image Updater for Git Ops Repositories
+Container Image Updater for Git Ops Repos
 
 
 * Free software: GNU General Public License v3
-* Documentation: https://virgo.readthedocs.io.
+* Documentation: https://uptainer.readthedocs.io.
 
 
 Features

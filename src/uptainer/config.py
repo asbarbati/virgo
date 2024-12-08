@@ -4,7 +4,7 @@ from os import environ
 
 class Config:
     def __init__(self) -> None:
-        """Configuration class for the Virgo Object.
+        """Configuration class for the uptainer Object.
 
         Args:
             None
@@ -25,7 +25,7 @@ class Config:
         """Load the config given from the file and inject it into the class vars.
 
         Args:
-            config (dict): The config dict given from virgo.loader.Loader.read_config
+            config (dict): The config dict given from uptainer.loader.Loader.read_config
 
         Returns:
             None

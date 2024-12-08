@@ -181,5 +181,5 @@ pyrightconfig.json
 pyvenv.cfg
 pip-selfcheck.json
 
-### Virgo ###
+### Uptainer ###
 config.yaml

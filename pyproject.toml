@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "virgo"
+name = "uptainer"
 version = "0.1.0"
 description = "Container Image Updater for Git Ops Repositories"
 readme = "README.rst"
@@ -31,9 +31,9 @@ dev = [
 
 [project.urls]
 
-bugs = "https://github.com/asbarbati/virgo/issues"
-changelog = "https://github.com/asbarbati/virgo/blob/master/changelog.md"
-homepage = "https://github.com/asbarbati/virgo"
+bugs = "https://github.com/asbarbati/uptainer/issues"
+changelog = "https://github.com/asbarbati/uptainer/blob/master/changelog.md"
+homepage = "https://github.com/asbarbati/uptainer"
 
 [tool.setuptools]
 package-dir = {"" = "src"}

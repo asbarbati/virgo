@@ -1,5 +1,5 @@
 import structlog
-from virgo.providers.dockerhub import DockerHub
+from uptainer.providers.dockerhub import DockerHub
 
 log = structlog.get_logger()
 

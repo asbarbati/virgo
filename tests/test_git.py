@@ -1,5 +1,5 @@
 import structlog
-from virgo.git import Git
+from uptainer.git import Git
 
 log = structlog.get_logger()
 

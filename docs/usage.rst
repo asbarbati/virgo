@@ -2,6 +2,6 @@
 Usage
 =====
 
-To use virgo in a project::
+To use uptainer in a project::
 
-    import virgo
+    import uptainer

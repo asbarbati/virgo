@@ -1,4 +1,4 @@
-"""Console script for virgo."""
+"""Console script for uptainer."""
 
 import typer
 import structlog
@@ -13,7 +13,7 @@ def main(  # noqa D417
     config_file: Annotated[Path, typer.Option(help="Configuration file")] = "config.yml",
     debug: Annotated[bool, typer.Option(help="Enable Debug logging")] = False,
 ) -> None:
-    """Main CLI function for Virgo project.
+    """Main CLI function for uptainer project.
 
     Args:
         config (Path): Configuration file with PATH class.
