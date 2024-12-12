@@ -1,0 +1,50 @@
+name: Pytest
+
+on:
+  pull_request:
+    branches: [ "main", "develop"]
+  push:
+    branches: ["develop"]
+    paths-ignore:
+      - 'CHANGELOG.md'
+      - 'docs/**'
+    tags:
+      - "v*"
+
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  pytest:
+    name: Pytest
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -e .
+
+      - name: Insert key for download public repos
+        run: |
+          mkdir /home/runner/.ssh
+          echo "${{ secrets.DEPLOY_KEY }}" | base64 -d - > /home/runner/.ssh/id_rsa
+          chmod 600 /home/runner/.ssh/id_rsa
+          chmod 700 /home/runner/.ssh
+
+      - name: Test with pytest
+        env:
+          GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pytest --cov=uptainer tests/

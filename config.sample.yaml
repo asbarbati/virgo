@@ -1,0 +1,9 @@
+repos:
+  - name: My super project
+    image_repository: ghcr.io/immich-app/immich-server
+    git_ssh_url: git@gitlab.example:main/mysuperproject.git
+    git_ssh_privatekey: /home/username/.ssh/foobar
+    git_branch: main
+    git_values_filename: values.yaml
+    values_key: image.tag
+    version_match: v1.[0-9]+.[0-9]+

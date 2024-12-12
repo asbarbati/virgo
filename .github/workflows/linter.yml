@@ -1,0 +1,23 @@
+name: Linter
+
+on:
+  pull_request:
+    branches: [ "main", "develop"]
+  push:
+    branches: ["develop"]
+    paths-ignore:
+      - 'CHANGELOG.md'
+      - 'docs/**'
+    tags:
+      - "v*"
+
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  ruff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/ruff-action@v1
