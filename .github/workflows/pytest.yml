@@ -37,6 +37,10 @@ jobs:
           pip install -r requirements.txt
           pip install -e .
 
+      - name: Generate fake ssh key for downloading public repos
+        run: |
+          ssh-keygen -q -t rsa -N '' -f /home/runner/.ssh/id_rsa
+
       - name: Test with pytest
         env:
           GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
