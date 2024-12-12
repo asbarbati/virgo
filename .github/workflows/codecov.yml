@@ -36,10 +36,12 @@ jobs:
           pip install -r requirements.txt
           pip install -e .
 
-      - name: Generate fake ssh key for downloading public repos
+      - name: Insert key for download public repos
         run: |
-          apt-get update && apt-get install -y openssh-client
-          ssh-keygen -q -t rsa -N '' -f /home/runner/.ssh/id_rsa
+          mkdir /home/runner/.ssh
+          echo "${DEPLOY_KEY}" | base64 -d - > /home/runner/.ssh/id_rsa
+          chmod 600 /home/runner/.ssh/id_rsa
+          chmod 700 /home/runner/.ssh
 
       - name: Run tests
         env:
