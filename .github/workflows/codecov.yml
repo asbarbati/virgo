@@ -39,7 +39,7 @@ jobs:
       - name: Insert key for download public repos
         run: |
           mkdir /home/runner/.ssh
-          echo "{{ secrets.DEPLOY_KEY }}" | base64 -d - > /home/runner/.ssh/id_rsa
+          echo "${{ secrets.DEPLOY_KEY }}" | base64 -d - > /home/runner/.ssh/id_rsa
           chmod 600 /home/runner/.ssh/id_rsa
           chmod 700 /home/runner/.ssh
 
