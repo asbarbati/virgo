@@ -4,6 +4,7 @@ from structlog._config import BoundLoggerLazyProxy
 from structlog.contextvars import bind_contextvars
 from box import Box
 from os.path import exists
+from urllib.parse import urlparse
 from .config import Config
 from .providers.github import GitHub
 from .providers.dockerhub import DockerHub
@@ -47,9 +48,10 @@ class UpTainer:
         image_repository = image_repository.replace("https://", "").replace("http://", "")
 
         if image_repository:
-            if image_repository.startswith("ghcr.io"):
+            urlparsed = urlparse(f"//{image_repository}")
+            if urlparsed.netloc == "ghcr.io":
                 out["data"] = GitHub(log=self.log)
-            if image_repository.startswith("docker.io"):
+            if urlparsed.netloc == "docker.io":
                 out["data"] = DockerHub(log=self.log)
             if len(image_repository.split("/")) <= DOCKERHUB_SPLITSLASHES:
                 # Match Dockerhub default format when the hostname its not specified.

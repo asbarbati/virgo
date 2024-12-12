@@ -2,6 +2,7 @@ from os import getenv
 from structlog._config import BoundLoggerLazyProxy
 from datetime import datetime
 from uptainer.typer import TyperImageVersion, TyperMetadata
+from urllib.parse import urlparse
 from .baseprovider import BaseProvider
 import requests
 
@@ -86,7 +87,8 @@ class DockerHub(BaseProvider):
         DOCKERHUB_SPLITSLASHES = 2
         out = TyperMetadata({"error": False, "data": {"parent": "", "project": ""}})
         self.log.info("Getting Metadata from 'DockerHub'")
-        if image_repository.startswith("docker.io"):
+        urlparsed = urlparse(f"//{image_repository}")
+        if urlparsed.netloc == "docker.io":
             name_split = image_repository.split("/")
             out["data"]["parent"] = name_split[1]
             out["data"]["project"] = name_split[2]
