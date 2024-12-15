@@ -5,7 +5,7 @@ import structlog
 import logging
 from pathlib import Path
 from typing import Annotated
-from .loader import Loader
+from uptainer.loader import Loader
 from structlog.contextvars import merge_contextvars
 
 

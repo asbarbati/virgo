@@ -1,7 +1,7 @@
 AUTHORS.rst
 CONTRIBUTING.rst
 HISTORY.rst
-LICENSE
+LICENSE.txt
 MANIFEST.in
 README.rst
 pyproject.toml
@@ -15,6 +15,9 @@ docs/installation.rst
 docs/make.bat
 docs/readme.rst
 docs/usage.rst
+docs/html/_static/file.png
+docs/html/_static/minus.png
+docs/html/_static/plus.png
 src/uptainer/__init__.py
 src/uptainer/cli.py
 src/uptainer/config.py

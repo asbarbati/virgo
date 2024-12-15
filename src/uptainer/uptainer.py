@@ -5,12 +5,12 @@ from structlog.contextvars import bind_contextvars
 from box import Box
 from os.path import exists
 from urllib.parse import urlparse
-from .config import Config
-from .providers.github import GitHub
-from .providers.dockerhub import DockerHub
-from .providers.baseprovider import BaseProvider
-from .git import Git
-from .typer import TyperImageProvider, TyperDetectedVersion, TyperImageList, TyperGenericReturn
+from uptainer.config import Config
+from uptainer.providers.github import GitHub
+from uptainer.providers.dockerhub import DockerHub
+from uptainer.providers.baseprovider import BaseProvider
+from uptainer.git import Git
+from uptainer.typer import TyperImageProvider, TyperDetectedVersion, TyperImageList, TyperGenericReturn
 import re
 import yaml
 
