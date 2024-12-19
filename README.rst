@@ -6,7 +6,7 @@ UpTainer
    :alt: Codecov
 
 .. image:: https://readthedocs.org/projects/uptainer/badge/?version=latest
-        :target: https://uptainer.readthedocs.io/en/latest/?version=latest
+        :target: https://uptainer.readthedocs.io/
         :alt: Documentation Status
 
 Uptainer is a Python CLI that automates tool updates, ensuring consistency and reliability in your GitOps-driven infrastructure.
