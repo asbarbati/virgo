@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: uptainer
-Version: 0.1.2
+Version: 0.1.4
 Summary: Uptainer is a Python CLI that automates tool updates, ensuring consistency and reliability in your GitOps-driven infrastructure.
 Author-email: Alessandro Sbarbati <122787746+asbarbati@users.noreply.github.com>
 Maintainer-email: Alessandro Sbarbati <122787746+asbarbati@users.noreply.github.com>
@@ -9,11 +9,15 @@ Project-URL: homepage, https://github.com/asbarbati/uptainer
 Project-URL: docs, https://uptainer.readthedocs.io
 Project-URL: source, https://github.com/asbarbati/uptainer/
 Project-URL: bugs, https://github.com/asbarbati/uptainer/issues
-Project-URL: changelog, https://github.com/asbarbati/uptainer/blob/master/CHANGELOG.md
+Project-URL: changelog, https://github.com/asbarbati/uptainer/blob/master/changelog.md
+Classifier: Development Status :: 3 - Alpha
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: System Administrators
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
 Description-Content-Type: text/x-rst
 License-File: LICENSE.txt
 License-File: AUTHORS.rst
-Requires-Python: >=3.6
 Requires-Dist: GitPython
 Requires-Dist: pre_commit
 Requires-Dist: python-box
@@ -23,6 +27,11 @@ Requires-Dist: structlog
 Requires-Dist: typer
 Requires-Dist: types-PyYAML
 Requires-Dist: types-requests
+Provides-Extra: dev
+Requires-Dist: coverage; extra == "dev"
+Requires-Dist: mypy; extra == "dev"
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
 
 UpTainer
 ========
@@ -32,7 +41,7 @@ UpTainer
    :alt: Codecov
 
 .. image:: https://readthedocs.org/projects/uptainer/badge/?version=latest
-        :target: https://uptainer.readthedocs.io/en/latest/?version=latest
+        :target: https://uptainer.readthedocs.io/
         :alt: Documentation Status
 
 Uptainer is a Python CLI that automates tool updates, ensuring consistency and reliability in your GitOps-driven infrastructure.

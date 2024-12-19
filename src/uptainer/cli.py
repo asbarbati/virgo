@@ -8,7 +8,10 @@ from typing import Annotated
 from uptainer.loader import Loader
 from structlog.contextvars import merge_contextvars
 
+app = typer.Typer()
 
+
+@app.command()
 def main(  # noqa D417
     config_file: Annotated[Path, typer.Option(help="Configuration file")] = "config.yml",
     debug: Annotated[bool, typer.Option(help="Enable Debug logging")] = False,
@@ -52,4 +55,4 @@ def main(  # noqa D417
 
 
 if __name__ == "__main__":
-    typer.run(main)
+    app()

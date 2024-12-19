@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "uptainer"
-version = "0.1.4"
+version = "0.1.5"
 description = "Uptainer is a Python CLI that automates tool updates, ensuring consistency and reliability in your GitOps-driven infrastructure."
 readme = "README.rst"
 authors = [
@@ -49,7 +49,7 @@ bugs = "https://github.com/asbarbati/uptainer/issues"
 changelog = "https://github.com/asbarbati/uptainer/blob/master/changelog.md"
 
 [project.scripts]
-uptainer = "uptainer.cli"
+uptainer = "uptainer.cli:app"
 
 [tool.setuptools]
 package-dir = {"" = "src"}

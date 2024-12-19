@@ -12,9 +12,4 @@ types-requests
 coverage
 mypy
 pytest
-pytest
-pytest-cov
 ruff
-Sphinx
-tox
-twine
