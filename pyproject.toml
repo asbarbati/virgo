@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "uptainer"
-version = "0.1.3"
+version = "0.1.4"
 description = "Uptainer is a Python CLI that automates tool updates, ensuring consistency and reliability in your GitOps-driven infrastructure."
 readme = "README.rst"
 authors = [
@@ -43,8 +43,8 @@ dev = [
 
 [project.urls]
 homepage = "https://github.com/asbarbati/uptainer"
-docs = https://uptainer.readthedocs.io
-source = https://github.com/asbarbati/uptainer/
+docs = "https://uptainer.readthedocs.io"
+source = "https://github.com/asbarbati/uptainer/"
 bugs = "https://github.com/asbarbati/uptainer/issues"
 changelog = "https://github.com/asbarbati/uptainer/blob/master/changelog.md"
 
