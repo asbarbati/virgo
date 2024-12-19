@@ -8,10 +8,8 @@ Welcome to uptainer's documentation!
    readme
    installation
    usage
-   modules
+   reference
    contributing
-   authors
-   history
 
 Indices and tables
 ==================
