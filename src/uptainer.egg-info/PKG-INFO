@@ -1,19 +1,18 @@
 Metadata-Version: 2.1
 Name: uptainer
-Version: 0.1.0
+Version: 0.1.2
 Summary: Uptainer is a Python CLI that automates tool updates, ensuring consistency and reliability in your GitOps-driven infrastructure.
 Author-email: Alessandro Sbarbati <122787746+asbarbati@users.noreply.github.com>
 Maintainer-email: Alessandro Sbarbati <122787746+asbarbati@users.noreply.github.com>
 License: GNU General Public License v3
-Project-URL: bugs, https://github.com/asbarbati/uptainer/issues
-Project-URL: changelog, https://github.com/asbarbati/uptainer/blob/master/CHANGELOG.md
 Project-URL: homepage, https://github.com/asbarbati/uptainer
 Project-URL: docs, https://uptainer.readthedocs.io
 Project-URL: source, https://github.com/asbarbati/uptainer/
+Project-URL: bugs, https://github.com/asbarbati/uptainer/issues
+Project-URL: changelog, https://github.com/asbarbati/uptainer/blob/master/CHANGELOG.md
 Description-Content-Type: text/x-rst
 License-File: LICENSE.txt
 License-File: AUTHORS.rst
-Provides-Extra: dev
 Requires-Python: >=3.6
 Requires-Dist: GitPython
 Requires-Dist: pre_commit
