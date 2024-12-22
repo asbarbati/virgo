@@ -7,6 +7,8 @@ Welcome to uptainer's documentation!
 
    readme
    installation
+   create_token
+   config
    usage
    reference
    contributing

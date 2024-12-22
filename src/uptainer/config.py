@@ -52,4 +52,4 @@ class Config:
             self.git_ssh_privatekey = config["git_ssh_privatekey"]
         else:
             homedir = environ.get("HOME", "/tmp")
-            self.git_ssh_privatekey = f"{homedir}/id_rsa"
+            self.git_ssh_privatekey = f"{homedir}/.ssh/id_rsa"

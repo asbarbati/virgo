@@ -40,10 +40,7 @@ class GitHub(BaseProvider):
 
         Returns:
             Return a dict that have image metadata like:
-            {"error": <bool>, "data": [
-                {"last_update": "<datetime object>",
-                 "name": ['<version1>', ...]},]
-            }
+            {"error": <bool>, "data": [{"last_update": "<datetime object>", "name": ['<version1>', ...]},]}
         """
         STATUS_CODE_OK = 200
         out = TyperImageVersion({"error": False, "data": []})
@@ -83,10 +80,7 @@ class GitHub(BaseProvider):
 
         Returns:
             Return a dict that have image metadata like:
-            {"error": <bool>, "data":
-                {"parent": "<organization name or user>",
-                 "project": "<project name>"}
-            }
+            {"error": <bool>, "data": {"parent": "<organization name or user>", "project": "<project name>"}}
         """
         out = TyperMetadata({"error": False, "data": {"parent": "", "project": ""}})
         self.log.info("Getting Metadata from 'GitHub'")
