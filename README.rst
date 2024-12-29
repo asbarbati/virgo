@@ -17,6 +17,9 @@ What are the ideal applications for this tool?
 ----------------------------------------------
 In any scenario where you employ a continuous delivery tools (like `ArgoCD <https://github.com/argoproj/argo-cd>`_, `Flux <https://github.com/fluxcd/flux2>`_, ecc) to deploy the applications you manage.
 
+.. image:: https://raw.githubusercontent.com/asbarbati/uptainer/refs/heads/develop/docs/schema.png
+   :alt: Infrastructure Schema
+
 Features
 --------
 * Built-in Integration with DockerHub.
@@ -30,12 +33,7 @@ More information: `ReadTheDocs <https://uptainer.readthedocs.io>`_
 
 Quick Start
 -----------
-1. Create a new virtualenv using `python3 -m venv venv`
-2. Load it using `. ./.venv/bin/activate`
-3. Install the pkg using `pip install uptainer`
-4. Copy the sample configuration into config.yaml `cp config.sample.yaml config.yaml`
-5. Edit the configuration in the config file as your environment.
-6. Run it using `python3 -m uptainer.cli --config-file config.yaml`
+Start here: https://uptainer.readthedocs.io/usage.html#cli-tool
 
 Contributing
 ------------
