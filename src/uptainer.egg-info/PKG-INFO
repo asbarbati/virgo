@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: uptainer
-Version: 0.1.4
+Version: 0.1.6
 Summary: Uptainer is a Python CLI that automates tool updates, ensuring consistency and reliability in your GitOps-driven infrastructure.
 Author-email: Alessandro Sbarbati <122787746+asbarbati@users.noreply.github.com>
 Maintainer-email: Alessandro Sbarbati <122787746+asbarbati@users.noreply.github.com>
