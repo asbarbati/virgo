@@ -11,16 +11,17 @@ ENV USER_GID="1000"
 ENV USER_NAME="app"
 
 RUN adduser -u "${USER_UID}" -D -h /app "${USER_NAME}" \
-    && apk --no-cache upgrade && apk add --no-cache git=2.47.1-r0 py3-pip=24.3.1-r0
+    && apk --no-cache upgrade && apk add --no-cache git=2.47.1-r0 py3-pip=24.3.1-r0 openssh-client-default=9.9_p1-r2
 
 USER app
 WORKDIR /app
-ENV UPTAINER_VERSION="0.1.6"
+ENV UPTAINER_VERSION="0.1.7"
 
 ENV PATH="/app/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
-RUN pip install --break-system-packages --user --no-cache-dir "uptainer==${UPTAINER_VERSION}"
+RUN pip install --break-system-packages --user --no-cache-dir "uptainer==${UPTAINER_VERSION}" \
+    && mkdir /app/.ssh && printf 'Host *\n    StrictHostKeyChecking no\n' > /app/.ssh/config
 
 # Set an empty volume
-VOLUME ["/tmp", "/etc/uptainer"]
+VOLUME ["/tmp", "/etc/uptainer", "/app/.ssh/id_rsa"]
 CMD ["/app/.local/bin/uptainer", "--config", "/etc/uptainer/config.yaml"]
