@@ -1,5 +1,5 @@
 from structlog._config import BoundLoggerLazyProxy
-from .typer import TyperGenericReturn
+from uptainer.typer import TyperGenericReturn
 import tempfile
 import git
 

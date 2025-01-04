@@ -1,9 +1,9 @@
 from yaml import safe_load
 from pathlib import Path
 from structlog._config import BoundLoggerLazyProxy
-from .config import Config
-from .uptainer import UpTainer
-from .typer import TyperConfigs, TyperConfig
+from uptainer.config import Config
+from uptainer.uptainer import UpTainer
+from uptainer.typer import TyperConfigs, TyperConfig
 
 
 class Loader:

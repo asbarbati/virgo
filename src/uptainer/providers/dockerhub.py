@@ -37,10 +37,7 @@ class DockerHub(BaseProvider):
 
         Returns:
             Return a dict that have image metadata like:
-            {"error": <bool>, "data": [
-                {"last_update": "<datetime object>",
-                 "name": ['<version1>', ...]},]
-            }
+            {'error': <bool>, 'data': [{'last_update': '<datetime object>", 'name': ['<version1>', ...]},]}
         """
         STATUS_CODE_OK = 200
         out = TyperImageVersion({"error": False, "data": []})
@@ -79,10 +76,7 @@ class DockerHub(BaseProvider):
 
         Returns:
             Return a dict that have image metadata like:
-            {"error": <bool>, "data":
-                {"parent": "<organization name or user>",
-                 "project": "<project name>"}
-            }
+            {"error": <bool>, "data": {"parent": "<organization name or user>", "project": "<project name>"}}
         """
         DOCKERHUB_SPLITSLASHES = 2
         out = TyperMetadata({"error": False, "data": {"parent": "", "project": ""}})

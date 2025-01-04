@@ -7,11 +7,11 @@ Welcome to uptainer's documentation!
 
    readme
    installation
+   create_token
+   config
    usage
-   modules
+   reference
    contributing
-   authors
-   history
 
 Indices and tables
 ==================
